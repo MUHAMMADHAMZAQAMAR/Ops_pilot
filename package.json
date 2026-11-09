@@ -1,0 +1,17 @@
+{
+  "name": "zero-trust-ai-saas-platform",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "dev:frontend": "npm run dev --prefix frontend",
+    "dev:backend": "npm run dev --prefix backend",
+    "build:frontend": "npm run build --prefix frontend",
+    "build:backend": "npm run build --prefix backend",
+    "docker:up": "docker compose up --build",
+    "docker:down": "docker compose down"
+  }
+}
