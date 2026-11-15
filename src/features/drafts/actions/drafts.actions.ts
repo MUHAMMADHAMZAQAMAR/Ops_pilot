@@ -1,6 +1,6 @@
 'use server';
 
-import { createClient } from '@/lib/supabase/server';
+import { getVerifiedOperator } from '@/lib/supabase/auth-fast';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { revalidatePath } from 'next/cache';
 
@@ -9,10 +9,7 @@ export async function updateDraftContent(draftId: string, content: string) {
     return { error: 'Draft content cannot be empty.' };
   }
 
-  const userClient = await createClient();
-  const {
-    data: { user },
-  } = await userClient.auth.getUser();
+  const user = await getVerifiedOperator();
 
   if (!user) {
     return { error: 'Authentication required.' };
@@ -39,10 +36,7 @@ export async function approveAndSendDraft(draftId: string) {
     return { error: 'Invalid draft identifier.' };
   }
 
-  const userClient = await createClient();
-  const {
-    data: { user },
-  } = await userClient.auth.getUser();
+  const user = await getVerifiedOperator();
 
   if (!user) {
     return { error: 'Authentication required.' };
@@ -121,10 +115,7 @@ export async function rejectDraft(draftId: string) {
     return { error: 'Invalid draft identifier.' };
   }
 
-  const userClient = await createClient();
-  const {
-    data: { user },
-  } = await userClient.auth.getUser();
+  const user = await getVerifiedOperator();
 
   if (!user) {
     return { error: 'Authentication required.' };

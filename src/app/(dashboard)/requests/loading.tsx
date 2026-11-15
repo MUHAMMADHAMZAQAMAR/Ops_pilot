@@ -9,7 +9,7 @@ export default function RequestsLoading() {
         {[1, 2, 3, 4].map((i) => (
           <div
             key={i}
-            className="rounded-3xl p-6 bg-white/[0.04] backdrop-blur-xl border border-white/[0.08]"
+            className="rounded-3xl p-6 bg-white/[0.04] border border-white/[0.08]"
           >
             <div className="flex items-center justify-between">
               <GlassSkeleton className="w-28 h-3" />
@@ -24,7 +24,7 @@ export default function RequestsLoading() {
       </div>
 
       {/* Form Skeleton */}
-      <div className="rounded-3xl p-6 sm:p-8 bg-white/[0.04] backdrop-blur-xl border border-white/[0.08] space-y-4">
+      <div className="rounded-3xl p-6 sm:p-8 bg-white/[0.04] border border-white/[0.08] space-y-4">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-3">
             <GlassSkeleton variant="avatar" className="h-10 w-10 rounded-2xl" />
@@ -43,7 +43,7 @@ export default function RequestsLoading() {
       </div>
 
       {/* Ledger Skeleton */}
-      <div className="rounded-3xl p-6 bg-white/[0.04] backdrop-blur-xl border border-white/[0.08]">
+      <div className="rounded-3xl p-6 bg-white/[0.04] border border-white/[0.08]">
         <div className="flex justify-between items-center mb-6">
           <GlassSkeleton className="w-44 h-5" />
           <GlassSkeleton variant="badge" className="w-28" />

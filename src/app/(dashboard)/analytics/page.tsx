@@ -1,7 +1,9 @@
 import React from 'react';
+import Link from 'next/link';
 import { GlassCard } from '@/components/ui/glass-card';
 import { GlassBadge } from '@/components/ui/glass-badge';
-import { LineChart, TrendingUp, DollarSign, PackageCheck, AlertCircle } from 'lucide-react';
+import { GlassButton } from '@/components/ui/glass-button';
+import { LineChart, TrendingUp, DollarSign, PackageCheck, AlertCircle, ShieldCheck, ArrowRight } from 'lucide-react';
 import { getOrders, calculateOrderMetrics } from '@/features/orders/services/orders.service';
 import { getInventoryItems, calculateInventoryMetrics } from '@/features/inventory/services/inventory.service';
 
@@ -24,8 +26,8 @@ export default async function AnalyticsPage() {
   const stockHealthRatio =
     inventoryMetrics.totalSkus > 0
       ? Math.round(
-          (inventoryMetrics.healthyStockCount / inventoryMetrics.totalSkus) * 100
-        )
+        (inventoryMetrics.healthyStockCount / inventoryMetrics.totalSkus) * 100
+      )
       : 0;
 
   return (
@@ -46,9 +48,18 @@ export default async function AnalyticsPage() {
               </p>
             </div>
           </div>
-          <GlassBadge variant="cyan" pulseDot>
-            Real-Time Query
-          </GlassBadge>
+          <div className="flex items-center gap-3">
+            <GlassBadge variant="cyan" pulseDot>
+              Real-Time Query
+            </GlassBadge>
+            <Link href="/analytics/reports">
+              <GlassButton variant="lime">
+                <ShieldCheck className="w-3.5 h-3.5" />
+                <span>Compliance Reports</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </GlassButton>
+            </Link>
+          </div>
         </div>
       </GlassCard>
 
@@ -95,13 +106,13 @@ export default async function AnalyticsPage() {
           <div className="text-3xl font-black text-white">
             {orderMetrics.totalOrders > 0
               ? (
-                  orderMetrics.totalRevenueCents /
-                  orderMetrics.totalOrders /
-                  100
-                ).toLocaleString('en-US', {
-                  style: 'currency',
-                  currency: 'USD',
-                })
+                orderMetrics.totalRevenueCents /
+                orderMetrics.totalOrders /
+                100
+              ).toLocaleString('en-US', {
+                style: 'currency',
+                currency: 'USD',
+              })
               : '$0.00'}
           </div>
           <span className="text-[11px] text-slate-400 mt-1 block">Per purchase order</span>

@@ -58,7 +58,7 @@ export function Sidebar({ userEmail, isOpen = false, onClose }: SidebarProps) {
       {/* Mobile Backdrop overlay (clicks outside close sidebar) */}
       {isOpen && (
         <div
-          className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm lg:hidden transition-opacity"
+          className="fixed inset-0 z-40 bg-black/60 lg:hidden transition-opacity"
           onClick={onClose}
         />
       )}
@@ -66,7 +66,7 @@ export function Sidebar({ userEmail, isOpen = false, onClose }: SidebarProps) {
       <aside
         className={cn(
           'fixed top-0 bottom-0 left-0 z-50 w-72 flex flex-col justify-between p-5',
-          'bg-slate-950/70 backdrop-blur-xl border-r border-white/10 text-slate-200',
+          'bg-slate-950/70 border-r border-white/10 text-slate-200',
           'transition-transform duration-300 ease-in-out lg:translate-x-0',
           isOpen ? 'translate-x-0' : '-translate-x-full'
         )}

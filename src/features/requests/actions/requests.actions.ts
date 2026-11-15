@@ -1,6 +1,6 @@
 'use server';
 
-import { createClient } from '@/lib/supabase/server';
+import { getVerifiedOperator } from '@/lib/supabase/auth-fast';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { revalidatePath } from 'next/cache';
 
@@ -12,11 +12,8 @@ export async function createBusinessRequest(formData: FormData) {
     return { error: 'Please enter a clear business prompt (at least 5 characters).' };
   }
 
-  // Verify operator identity from cookies
-  const userClient = await createClient();
-  const {
-    data: { user },
-  } = await userClient.auth.getUser();
+  // Fast 0ms local JWT verification (already authenticated at login)
+  const user = await getVerifiedOperator();
 
   if (!user) {
     return { error: 'You must be signed in as an operator to launch agent tasks.' };

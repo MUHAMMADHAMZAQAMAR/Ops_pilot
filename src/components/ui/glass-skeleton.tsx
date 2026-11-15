@@ -17,7 +17,7 @@ export function GlassSkeleton({
     badge: 'h-6 w-20 rounded-full',
     avatar: 'h-10 w-10 rounded-full',
     button: 'h-10 w-28 rounded-full',
-    card: 'rounded-2xl sm:rounded-3xl p-6 bg-white/[0.04] backdrop-blur-xl shadow-[0_8px_32px_0_rgba(0,0,0,0.36)]',
+    card: 'rounded-2xl sm:rounded-3xl p-6 bg-white/[0.04] shadow-[0_8px_32px_0_rgba(0,0,0,0.36)]',
   };
 
   return (

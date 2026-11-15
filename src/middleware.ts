@@ -14,10 +14,12 @@ export const config = {
     '/runs/:path*',
     '/approvals/:path*',
     '/drafts/:path*',
+    '/automation/:path*',
     '/orders/:path*',
     '/inventory/:path*',
     '/customers/:path*',
     '/analytics/:path*',
+    '/settings/:path*',
     '/login',
   ],
 };

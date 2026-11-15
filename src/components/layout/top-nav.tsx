@@ -9,9 +9,12 @@ import {
   Menu,
   X,
   Zap,
+  Settings,
 } from 'lucide-react';
 import { signout } from '@/app/(auth)/login/actions';
 import { cn } from '@/lib/utils';
+import { useRealtimeTelemetry } from '@/features/realtime/components/realtime-provider';
+import { LiveActivityBell } from '@/features/realtime/components/live-activity-bell';
 
 const navItems = [
   { name: 'Dashboard', href: '/dashboard' },
@@ -19,6 +22,7 @@ const navItems = [
   { name: 'Approvals', href: '/approvals' },
   { name: 'Runs', href: '/runs' },
   { name: 'Drafts', href: '/drafts' },
+  { name: 'Automation', href: '/automation' },
   { name: 'Orders', href: '/orders' },
   { name: 'Inventory', href: '/inventory' },
   { name: 'Customers', href: '/customers' },
@@ -32,6 +36,7 @@ interface TopNavProps {
 export function TopNav({ userEmail }: TopNavProps) {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { counts } = useRealtimeTelemetry();
 
   // Extract display name or fallback from env
   const fallbackName = process.env.NEXT_PUBLIC_DEFAULT_OPERATOR_NAME || 'Operator';
@@ -70,25 +75,61 @@ export function TopNav({ userEmail }: TopNavProps) {
                 item.href === '/dashboard'
                   ? pathname === '/dashboard' || pathname === '/'
                   : pathname.startsWith(item.href);
+
+              const badgeCount =
+                item.href === '/approvals'
+                  ? counts.pendingApprovals
+                  : item.href === '/drafts'
+                    ? counts.pendingDrafts
+                    : 0;
+
               return (
                 <Link
                   key={item.href}
                   href={item.href}
                   className={cn(
-                    'px-4 py-1.5 rounded-full text-xs font-medium transition-all duration-300 tracking-tight cursor-pointer active:scale-95',
+                    'px-3.5 py-1.5 rounded-full text-xs font-medium transition-all duration-300 tracking-tight cursor-pointer active:scale-95 flex items-center gap-1.5',
                     isActive
                       ? 'glass-pill-active text-white font-semibold'
                       : 'text-slate-400 hover:text-slate-100 hover:bg-white/[0.08] hover:scale-105'
                   )}
                 >
-                  {item.name}
+                  <span>{item.name}</span>
+                  {badgeCount > 0 && (
+                    <span
+                      className={cn(
+                        'px-1.5 py-0.2 rounded-full text-[10px] font-bold leading-tight',
+                        item.href === '/approvals'
+                          ? 'bg-amber-400/20 text-amber-300 border border-amber-400/30'
+                          : 'bg-cyan-400/20 text-cyan-300 border border-cyan-400/30'
+                      )}
+                    >
+                      {badgeCount}
+                    </span>
+                  )}
                 </Link>
               );
             })}
           </nav>
 
-          {/* Right: Operator Profile & Sign-Out */}
+          {/* Right: Live Telemetry Bell, Operator Profile & Sign-Out */}
           <div className="flex items-center gap-2 pr-1">
+            <LiveActivityBell />
+
+            <Link
+              href="/settings"
+              className={cn(
+                'h-8 w-8 rounded-full border flex items-center justify-center transition-all cursor-pointer',
+                pathname.startsWith('/settings')
+                  ? 'bg-white/20 border-white/35 text-white'
+                  : 'bg-white/[0.04] hover:bg-white/[0.1] border-white/10 text-slate-400 hover:text-white'
+              )}
+              title="Operator Settings"
+              aria-label="Operator Settings"
+            >
+              <Settings className="w-3.5 h-3.5" />
+            </Link>
+
             <div className="flex items-center gap-2.5 pl-2 pr-3 py-1 rounded-full bg-white/[0.04] border border-white/10">
               <div className="h-7 w-7 rounded-full bg-gradient-to-br from-amber-400 to-rose-500 flex items-center justify-center text-white text-[11px] font-bold shadow-sm">
                 {displayName.charAt(0).toUpperCase()}

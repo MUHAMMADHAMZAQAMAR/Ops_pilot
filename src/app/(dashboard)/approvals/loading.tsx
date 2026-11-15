@@ -9,7 +9,7 @@ export default function ApprovalsLoading() {
         {[1, 2, 3, 4].map((i) => (
           <div
             key={i}
-            className="rounded-3xl p-6 bg-white/[0.04] backdrop-blur-xl border border-white/[0.08]"
+            className="rounded-3xl p-6 bg-white/[0.04] border border-white/[0.08]"
           >
             <div className="flex items-center justify-between">
               <GlassSkeleton className="w-28 h-3" />
@@ -34,7 +34,7 @@ export default function ApprovalsLoading() {
         {[1, 2].map((i) => (
           <div
             key={i}
-            className="rounded-3xl p-6 bg-white/[0.04] backdrop-blur-xl border border-white/[0.08] space-y-4"
+            className="rounded-3xl p-6 bg-white/[0.04] border border-white/[0.08] space-y-4"
           >
             <div className="flex justify-between items-start">
               <div className="flex items-center gap-3">

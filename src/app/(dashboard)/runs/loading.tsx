@@ -19,7 +19,7 @@ export default function RunsLoading() {
         {[1, 2, 3, 4].map((i) => (
           <div
             key={i}
-            className="rounded-3xl p-5 bg-white/[0.04] backdrop-blur-xl border border-white/[0.08] space-y-3"
+            className="rounded-3xl p-5 bg-white/[0.04] border border-white/[0.08] space-y-3"
           >
             <div className="flex items-center justify-between">
               <GlassSkeleton className="w-24 h-3" />
@@ -48,7 +48,7 @@ export default function RunsLoading() {
         {[1, 2, 3, 4].map((i) => (
           <div
             key={i}
-            className="rounded-3xl p-5 bg-white/[0.04] backdrop-blur-xl border border-white/[0.08] flex flex-col md:flex-row md:items-center justify-between gap-4"
+            className="rounded-3xl p-5 bg-white/[0.04] border border-white/[0.08] flex flex-col md:flex-row md:items-center justify-between gap-4"
           >
             <div className="space-y-2 flex-1">
               <div className="flex items-center gap-2">

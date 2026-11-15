@@ -41,7 +41,7 @@ export function Header({ onMenuToggle, isSidebarOpen }: HeaderProps) {
   };
 
   return (
-    <header className="sticky top-0 z-30 w-full bg-slate-950/60 backdrop-blur-xl border-b border-white/10 px-4 sm:px-8 py-4 flex items-center justify-between">
+    <header className="sticky top-0 z-30 w-full bg-slate-950/60 border-b border-white/10 px-4 sm:px-8 py-4 flex items-center justify-between">
       {/* Left: Mobile Toggle + Section Breadcrumb */}
       <div className="flex items-center gap-3">
         {/* Mobile menu toggle button (single control, changes icon based on state) */}

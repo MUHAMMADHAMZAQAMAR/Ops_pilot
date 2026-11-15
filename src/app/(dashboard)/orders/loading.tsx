@@ -9,7 +9,7 @@ export default function OrdersLoading() {
         {[1, 2, 3].map((i) => (
           <div
             key={i}
-            className="rounded-3xl p-6 bg-white/[0.04] backdrop-blur-xl border border-white/[0.08]"
+            className="rounded-3xl p-6 bg-white/[0.04] border border-white/[0.08]"
           >
             <div className="flex items-center justify-between">
               <GlassSkeleton className="w-32 h-3" />
@@ -24,7 +24,7 @@ export default function OrdersLoading() {
       </div>
 
       {/* Orders Glass Table Skeleton */}
-      <div className="rounded-3xl p-6 bg-white/[0.04] backdrop-blur-xl border border-white/[0.08]">
+      <div className="rounded-3xl p-6 bg-white/[0.04] border border-white/[0.08]">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
           <div className="space-y-1.5">
             <GlassSkeleton className="w-48 h-5" />

@@ -173,7 +173,7 @@ export default function LoginPage() {
 
           {/* Error Banner */}
           {error && (
-            <div className="mb-5 p-3.5 rounded-2xl bg-rose-500/20 border border-rose-500/35 text-rose-200 text-xs flex items-start gap-2.5 backdrop-blur-md animate-in fade-in">
+            <div className="mb-5 p-3.5 rounded-2xl bg-rose-500/20 border border-rose-500/35 text-rose-200 text-xs flex items-start gap-2.5 animate-in fade-in">
               <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5 text-rose-300" />
               <span>{error}</span>
             </div>

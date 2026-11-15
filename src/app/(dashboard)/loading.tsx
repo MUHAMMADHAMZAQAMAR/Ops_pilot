@@ -5,7 +5,7 @@ export default function DefaultDashboardLoading() {
   return (
     <div className="space-y-6">
       {/* Header bar skeleton */}
-      <div className="rounded-3xl p-6 bg-white/[0.04] backdrop-blur-xl border border-white/[0.08]">
+      <div className="rounded-3xl p-6 bg-white/[0.04] border border-white/[0.08]">
         <div className="flex items-center justify-between">
           <div className="space-y-2">
             <GlassSkeleton className="w-48 h-5" />
@@ -20,7 +20,7 @@ export default function DefaultDashboardLoading() {
         {[1, 2, 3].map((i) => (
           <div
             key={i}
-            className="rounded-3xl p-6 bg-white/[0.04] backdrop-blur-xl border border-white/[0.08]"
+            className="rounded-3xl p-6 bg-white/[0.04] border border-white/[0.08]"
           >
             <div className="flex items-center justify-between">
               <GlassSkeleton className="w-28 h-3" />
@@ -35,7 +35,7 @@ export default function DefaultDashboardLoading() {
       </div>
 
       {/* Main card skeleton */}
-      <div className="rounded-3xl p-6 bg-white/[0.04] backdrop-blur-xl border border-white/[0.08] h-72">
+      <div className="rounded-3xl p-6 bg-white/[0.04] border border-white/[0.08] h-72">
         <div className="flex items-center justify-between mb-6">
           <GlassSkeleton className="w-40 h-5" />
           <GlassSkeleton variant="badge" className="w-20" />

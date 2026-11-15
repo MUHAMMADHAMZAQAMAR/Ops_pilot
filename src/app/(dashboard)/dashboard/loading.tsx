@@ -7,7 +7,7 @@ export default function DashboardLoading() {
       {/* Top 3-Column Glass Skeleton Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Card 1 Skeleton */}
-        <div className="lg:col-span-4 rounded-3xl p-6 bg-white/[0.04] backdrop-blur-xl border border-white/[0.08] shadow-[0_8px_32px_0_rgba(0,0,0,0.36)] flex flex-col justify-between h-[360px]">
+        <div className="lg:col-span-4 rounded-3xl p-6 bg-white/[0.04] border border-white/[0.08] shadow-[0_8px_32px_0_rgba(0,0,0,0.36)] flex flex-col justify-between h-[360px]">
           <div>
             <GlassSkeleton className="w-36 h-4 mb-4" />
             <div className="flex items-baseline gap-3 my-4">
@@ -32,7 +32,7 @@ export default function DashboardLoading() {
         </div>
 
         {/* Card 2 Skeleton */}
-        <div className="lg:col-span-4 rounded-3xl p-6 bg-white/[0.04] backdrop-blur-xl border border-white/[0.08] shadow-[0_8px_32px_0_rgba(0,0,0,0.36)] flex flex-col justify-between h-[360px]">
+        <div className="lg:col-span-4 rounded-3xl p-6 bg-white/[0.04] border border-white/[0.08] shadow-[0_8px_32px_0_rgba(0,0,0,0.36)] flex flex-col justify-between h-[360px]">
           <div>
             <div className="flex items-center gap-2 mb-4">
               <GlassSkeleton variant="badge" className="w-24" />
@@ -59,7 +59,7 @@ export default function DashboardLoading() {
         </div>
 
         {/* Card 3 Skeleton */}
-        <div className="lg:col-span-4 rounded-3xl p-6 bg-white/[0.04] backdrop-blur-xl border border-white/[0.08] shadow-[0_8px_32px_0_rgba(0,0,0,0.36)] flex flex-col justify-between h-[360px]">
+        <div className="lg:col-span-4 rounded-3xl p-6 bg-white/[0.04] border border-white/[0.08] shadow-[0_8px_32px_0_rgba(0,0,0,0.36)] flex flex-col justify-between h-[360px]">
           <div>
             <div className="flex items-center justify-between mb-4">
               <GlassSkeleton className="w-28 h-4" />
@@ -88,7 +88,7 @@ export default function DashboardLoading() {
 
       {/* Bottom Row Skeleton */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        <div className="lg:col-span-8 rounded-3xl p-6 bg-white/[0.04] backdrop-blur-xl border border-white/[0.08] h-64">
+        <div className="lg:col-span-8 rounded-3xl p-6 bg-white/[0.04] border border-white/[0.08] h-64">
           <div className="flex items-center justify-between mb-6">
             <GlassSkeleton className="w-40 h-5" />
             <GlassSkeleton className="w-24 h-8 rounded-full" />
@@ -104,7 +104,7 @@ export default function DashboardLoading() {
           </div>
         </div>
 
-        <div className="lg:col-span-4 rounded-3xl p-6 bg-white/[0.04] backdrop-blur-xl border border-white/[0.08] h-64">
+        <div className="lg:col-span-4 rounded-3xl p-6 bg-white/[0.04] border border-white/[0.08] h-64">
           <div className="flex items-center justify-between mb-6">
             <GlassSkeleton className="w-32 h-5" />
             <GlassSkeleton variant="badge" className="w-16" />

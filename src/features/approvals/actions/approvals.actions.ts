@@ -1,6 +1,6 @@
 'use server';
 
-import { createClient } from '@/lib/supabase/server';
+import { getVerifiedOperator } from '@/lib/supabase/auth-fast';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { revalidatePath } from 'next/cache';
 
@@ -9,11 +9,8 @@ export async function resolveApproval(approvalId: string, decision: 'approved' |
     return { error: 'Invalid approval identifier.' };
   }
 
-  // 1. Verify operator authentication
-  const userClient = await createClient();
-  const {
-    data: { user },
-  } = await userClient.auth.getUser();
+  // 1. Fast 0ms local JWT verification (already authenticated at login)
+  const user = await getVerifiedOperator();
 
   if (!user) {
     return { error: 'Authentication required to authorize sensitive actions.' };

@@ -5,7 +5,7 @@ export default function CustomersLoading() {
   return (
     <div className="space-y-6">
       {/* Metric Header Card Skeleton */}
-      <div className="rounded-3xl p-6 bg-white/[0.04] backdrop-blur-xl border border-white/[0.08]">
+      <div className="rounded-3xl p-6 bg-white/[0.04] border border-white/[0.08]">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="flex items-center gap-3.5">
             <GlassSkeleton variant="avatar" className="h-10 w-10 rounded-2xl" />
@@ -23,7 +23,7 @@ export default function CustomersLoading() {
         {[1, 2, 3, 4, 5, 6].map((i) => (
           <div
             key={i}
-            className="rounded-3xl p-5 bg-white/[0.04] backdrop-blur-xl border border-white/[0.08] flex flex-col justify-between h-48"
+            className="rounded-3xl p-5 bg-white/[0.04] border border-white/[0.08] flex flex-col justify-between h-48"
           >
             <div>
               <div className="flex items-center justify-between mb-3">

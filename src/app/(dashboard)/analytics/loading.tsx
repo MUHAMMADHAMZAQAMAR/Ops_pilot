@@ -5,7 +5,7 @@ export default function AnalyticsLoading() {
   return (
     <div className="space-y-6">
       {/* Top Banner Skeleton */}
-      <div className="rounded-3xl p-6 bg-white/[0.04] backdrop-blur-xl border border-white/[0.08]">
+      <div className="rounded-3xl p-6 bg-white/[0.04] border border-white/[0.08]">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="flex items-center gap-3.5">
             <GlassSkeleton variant="avatar" className="h-10 w-10 rounded-2xl" />
@@ -23,7 +23,7 @@ export default function AnalyticsLoading() {
         {[1, 2, 3, 4].map((i) => (
           <div
             key={i}
-            className="rounded-3xl p-6 bg-white/[0.04] backdrop-blur-xl border border-white/[0.08]"
+            className="rounded-3xl p-6 bg-white/[0.04] border border-white/[0.08]"
           >
             <div className="flex items-center justify-between">
               <GlassSkeleton className="w-24 h-3" />
@@ -39,7 +39,7 @@ export default function AnalyticsLoading() {
 
       {/* Analytics Chart & Breakdown Skeletons */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        <div className="lg:col-span-8 rounded-3xl p-6 bg-white/[0.04] backdrop-blur-xl border border-white/[0.08] h-80">
+        <div className="lg:col-span-8 rounded-3xl p-6 bg-white/[0.04] border border-white/[0.08] h-80">
           <div className="flex items-center justify-between mb-6">
             <GlassSkeleton className="w-48 h-5" />
             <GlassSkeleton variant="badge" className="w-24" />
@@ -57,7 +57,7 @@ export default function AnalyticsLoading() {
           </div>
         </div>
 
-        <div className="lg:col-span-4 rounded-3xl p-6 bg-white/[0.04] backdrop-blur-xl border border-white/[0.08] h-80 flex flex-col justify-between">
+        <div className="lg:col-span-4 rounded-3xl p-6 bg-white/[0.04] border border-white/[0.08] h-80 flex flex-col justify-between">
           <div className="space-y-4">
             <GlassSkeleton className="w-36 h-5" />
             <div className="space-y-3 pt-2">
