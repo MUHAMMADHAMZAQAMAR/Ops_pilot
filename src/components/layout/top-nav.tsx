@@ -10,6 +10,8 @@ import {
   X,
   Zap,
   Settings,
+  Users,
+  Activity,
 } from 'lucide-react';
 import { signout } from '@/app/(auth)/login/actions';
 import { cn } from '@/lib/utils';
@@ -24,7 +26,11 @@ const navItems = [
   { name: 'Drafts', href: '/drafts' },
   { name: 'Automation', href: '/automation' },
   { name: 'Orders', href: '/orders' },
+  { name: 'Returns', href: '/returns' },
   { name: 'Inventory', href: '/inventory' },
+  { name: 'Forecast', href: '/forecast' },
+  { name: 'Suppliers', href: '/suppliers' },
+  { name: 'Integrations', href: '/integrations' },
   { name: 'Customers', href: '/customers' },
   { name: 'Analytics', href: '/analytics' },
 ];
@@ -115,6 +121,34 @@ export function TopNav({ userEmail }: TopNavProps) {
           {/* Right: Live Telemetry Bell, Operator Profile & Sign-Out */}
           <div className="flex items-center gap-2 pr-1">
             <LiveActivityBell />
+
+            <Link
+              href="/system"
+              className={cn(
+                'h-8 w-8 rounded-full border flex items-center justify-center transition-all cursor-pointer',
+                pathname.startsWith('/system')
+                  ? 'bg-white/20 border-white/35 text-white'
+                  : 'bg-white/[0.04] hover:bg-white/[0.1] border-white/10 text-slate-400 hover:text-white'
+              )}
+              title="System Health & Incidents"
+              aria-label="System Health & Incidents"
+            >
+              <Activity className="w-3.5 h-3.5" />
+            </Link>
+
+            <Link
+              href="/team"
+              className={cn(
+                'h-8 w-8 rounded-full border flex items-center justify-center transition-all cursor-pointer',
+                pathname.startsWith('/team')
+                  ? 'bg-white/20 border-white/35 text-white'
+                  : 'bg-white/[0.04] hover:bg-white/[0.1] border-white/10 text-slate-400 hover:text-white'
+              )}
+              title="Team & RBAC"
+              aria-label="Team & RBAC"
+            >
+              <Users className="w-3.5 h-3.5" />
+            </Link>
 
             <Link
               href="/settings"

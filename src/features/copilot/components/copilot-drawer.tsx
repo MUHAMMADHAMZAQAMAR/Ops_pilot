@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useRef, useEffect, useTransition } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import {
   Sparkles,
@@ -10,7 +10,7 @@ import {
   ArrowRight,
   MessageSquareText,
 } from 'lucide-react';
-import { askOpsPilotCopilot, CopilotMessage } from '../actions/copilot.actions';
+import type { CopilotMessage } from '../actions/copilot.actions';
 import { cn } from '@/lib/utils';
 
 const QUICK_PROMPTS = [
@@ -23,7 +23,7 @@ export function CopilotDrawer() {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState<CopilotMessage[]>([]);
-  const [isPending, startTransition] = useTransition();
+  const [isPending, setIsPending] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -32,7 +32,7 @@ export function CopilotDrawer() {
     }
   }, [messages, isOpen]);
 
-  const submitPrompt = (text: string) => {
+  const submitPrompt = async (text: string) => {
     const clean = text.trim();
     if (!clean || isPending) return;
 
@@ -43,28 +43,97 @@ export function CopilotDrawer() {
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
     };
 
+    const assistantId = `a-${Date.now()}`;
     const nextHistory = [...messages, userMsg];
     setMessages(nextHistory);
     setInput('');
+    setIsPending(true);
 
-    startTransition(async () => {
-      const res = await askOpsPilotCopilot(
-        clean,
-        nextHistory.map((m) => ({ role: m.role, content: m.content }))
-      );
+    try {
+      const res = await fetch('/api/copilot/stream', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          prompt: clean,
+          history: nextHistory.map((m) => ({ role: m.role, content: m.content })),
+        }),
+      });
 
-      const assistantMsg: CopilotMessage = {
-        id: `a-${Date.now()}`,
-        role: 'assistant',
-        content: res.error || res.reply || 'No response received.',
-        model: res.model,
-        toolsUsed: res.toolsUsed,
-        actionLink: res.actionLink,
-        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      if (!res.ok || !res.body) {
+        const errJson = await res.json().catch(() => ({}));
+        throw new Error(errJson.error || `Request failed (${res.status})`);
+      }
+
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      let buffer = '';
+      let createdAssistant = false;
+
+      const ensureAssistantMessage = () => {
+        if (createdAssistant) return;
+        createdAssistant = true;
+        setMessages((prev) => [
+          ...prev,
+          {
+            id: assistantId,
+            role: 'assistant',
+            content: '',
+            timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+          },
+        ]);
       };
 
-      setMessages((prev) => [...prev, assistantMsg]);
-    });
+      while (true) {
+        const { value, done } = await reader.read();
+        if (done) break;
+        buffer += decoder.decode(value, { stream: true });
+        const lines = buffer.split('\n');
+        buffer = lines.pop() ?? '';
+
+        for (const line of lines) {
+          const trimmed = line.trim();
+          if (!trimmed) continue;
+          const evt = JSON.parse(trimmed) as {
+            type: 'meta' | 'delta' | 'done';
+            text?: string;
+            model?: string;
+            toolsUsed?: string[];
+            actionLink?: { label: string; href: string };
+          };
+
+          if (evt.type === 'meta') {
+            ensureAssistantMessage();
+            setMessages((prev) =>
+              prev.map((m) =>
+                m.id === assistantId
+                  ? { ...m, model: evt.model, toolsUsed: evt.toolsUsed, actionLink: evt.actionLink }
+                  : m
+              )
+            );
+          } else if (evt.type === 'delta' && evt.text) {
+            ensureAssistantMessage();
+            setMessages((prev) =>
+              prev.map((m) =>
+                m.id === assistantId ? { ...m, content: m.content + evt.text } : m
+              )
+            );
+          }
+        }
+      }
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : 'Unable to reach Copilot stream.';
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: assistantId,
+          role: 'assistant',
+          content: msg,
+          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        },
+      ]);
+    } finally {
+      setIsPending(false);
+    }
   };
 
   const handleFormSubmit = (e: React.FormEvent) => {

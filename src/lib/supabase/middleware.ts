@@ -73,9 +73,15 @@ export async function updateSession(request: NextRequest) {
     request.nextUrl.pathname.startsWith('/drafts') ||
     request.nextUrl.pathname.startsWith('/automation') ||
     request.nextUrl.pathname.startsWith('/orders') ||
+    request.nextUrl.pathname.startsWith('/returns') ||
     request.nextUrl.pathname.startsWith('/inventory') ||
+    request.nextUrl.pathname.startsWith('/forecast') ||
+    request.nextUrl.pathname.startsWith('/suppliers') ||
+    request.nextUrl.pathname.startsWith('/integrations') ||
     request.nextUrl.pathname.startsWith('/customers') ||
     request.nextUrl.pathname.startsWith('/analytics') ||
+    request.nextUrl.pathname.startsWith('/team') ||
+    request.nextUrl.pathname.startsWith('/system') ||
     request.nextUrl.pathname.startsWith('/settings');
 
   // Redirect unauthenticated operators to /login
