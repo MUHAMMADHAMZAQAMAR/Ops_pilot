@@ -70,7 +70,7 @@ export function LiveActivityBell() {
       </button>
 
       {open && (
-        <div className="absolute right-0 mt-3 w-80 sm:w-96 rounded-3xl glass-panel p-4 shadow-[0_24px_60px_rgba(0,0,0,0.85)] border border-white/15 z-50 animate-fade-in-up">
+        <div className="absolute right-0 mt-3 w-80 sm:w-96 rounded-3xl bg-slate-950/95 backdrop-blur-2xl p-4 shadow-[0_24px_60px_rgba(0,0,0,0.85)] border border-white/15 z-50 animate-fade-in-up">
           <div className="flex items-center justify-between pb-3 border-b border-white/[0.08]">
             <div className="flex items-center gap-2">
               <Radio
